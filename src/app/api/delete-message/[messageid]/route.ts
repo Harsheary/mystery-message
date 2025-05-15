@@ -1,20 +1,30 @@
 import UserModel from '@/model/User';
 import { getServerSession } from 'next-auth/next';
 import dbConnect from '@/lib/dbConnect';
-import { User } from 'next-auth';
+import type { User } from 'next-auth';
 import { authOptions } from '../../auth/[...nextauth]/options';
+import { NextRequest, NextResponse } from 'next/server';
 
-// Most basic approach using Next.js's expected types
+interface RouteParams {
+  params: {
+    messageid: string;
+  };
+}
+
 export async function DELETE(
-  request: Request,
-  context: { params: { messageid: string } }
+  req: NextRequest,
+  context: RouteParams
 ) {
-  const messageId = context.params.messageid;
+  // Await dbConnect first
   await dbConnect();
+  
+  // Then use the parameters
+  const messageId = context.params.messageid;
+  
   const session = await getServerSession(authOptions);
   const _user: User = session?.user;
   if (!session || !_user) {
-    return Response.json(
+    return NextResponse.json(
       { success: false, message: 'Not authenticated' },
       { status: 401 }
     );
@@ -27,19 +37,19 @@ export async function DELETE(
     );
 
     if (updateResult.modifiedCount === 0) {
-      return Response.json(
+      return NextResponse.json(
         { message: 'Message not found or already deleted', success: false },
         { status: 404 }
       );
     }
 
-    return Response.json(
+    return NextResponse.json(
       { message: 'Message deleted', success: true },
       { status: 200 }
     );
   } catch (error) {
     console.error('Error deleting message:', error);
-    return Response.json(
+    return NextResponse.json(
       { message: 'Error deleting message', success: false },
       { status: 500 }
     );
