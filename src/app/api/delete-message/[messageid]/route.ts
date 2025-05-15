@@ -5,21 +5,18 @@ import type { User } from 'next-auth';
 import { authOptions } from '../../auth/[...nextauth]/options';
 import { NextRequest, NextResponse } from 'next/server';
 
-interface RouteParams {
-  params: {
-    messageid: string;
-  };
-}
+// Define the params type exactly as Next.js expects it
+type Params = { messageid: string };
 
 export async function DELETE(
-  req: NextRequest,
-  context: RouteParams
+  request: NextRequest,
+  { params }: { params: Params }
 ) {
-  // Await dbConnect first
+  // Connect to the database first
   await dbConnect();
   
-  // Then use the parameters
-  const messageId = context.params.messageid;
+  // Then access params
+  const messageId = params.messageid;
   
   const session = await getServerSession(authOptions);
   const _user: User = session?.user;
