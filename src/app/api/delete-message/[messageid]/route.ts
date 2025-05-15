@@ -3,20 +3,20 @@ import { getServerSession } from 'next-auth/next';
 import dbConnect from '@/lib/dbConnect';
 import type { User } from 'next-auth';
 import { authOptions } from '../../auth/[...nextauth]/options';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-// Define the params type exactly as Next.js expects it
-type Params = { messageid: string };
+
 
 export async function DELETE(
-  request: NextRequest,
-  { params }: { params: Params }
+  request: Request,
+  {params}: {params: Promise<{slug: string}>}
 ) {
-  // Connect to the database first
+
   await dbConnect();
   
-  // Then access params
-  const messageId = params.messageid;
+
+  const {slug} = await params;
+  
   
   const session = await getServerSession(authOptions);
   const _user: User = session?.user;
@@ -30,7 +30,7 @@ export async function DELETE(
   try {
     const updateResult = await UserModel.updateOne(
       { _id: _user._id },
-      { $pull: { messages: { _id: messageId } } }
+      { $pull: { messages: { _id: slug } } }
     );
 
     if (updateResult.modifiedCount === 0) {
