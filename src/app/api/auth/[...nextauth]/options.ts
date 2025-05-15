@@ -7,7 +7,7 @@ import { DefaultUser } from 'next-auth';
 
 // Define interface for the MongoDB User document
 interface UserDocument {
-  _id: any; // MongoDB ObjectId
+  _id: {toString(): string}; // MongoDB ObjectId
   email: string;
   username: string;
   password: string;
