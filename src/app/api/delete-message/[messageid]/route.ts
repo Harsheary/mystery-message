@@ -4,12 +4,12 @@ import dbConnect from '@/lib/dbConnect';
 import { User } from 'next-auth';
 import { authOptions } from '../../auth/[...nextauth]/options';
 
-
+// Most basic approach using Next.js's expected types
 export async function DELETE(
-  _:unknown,
-  { params }: { params: { messageid: string } }
+  request: Request,
+  context: { params: { messageid: string } }
 ) {
-  const messageId = params.messageid;
+  const messageId = context.params.messageid;
   await dbConnect();
   const session = await getServerSession(authOptions);
   const _user: User = session?.user;
