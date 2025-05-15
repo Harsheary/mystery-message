@@ -11,9 +11,10 @@ export const authOptions: NextAuthOptions = {
             id: "credentials",
             name: "Credentials",
             credentials: {
-                email: { label: "Email", type: "text" },
+                identifier: { label: "Email", type: "text" },
                 password: { label: "Password", type: "password" }
             },
+            // @ts-ignore
             async authorize(credentials: any): Promise<any> {
                 await dbConnect()
                 try {

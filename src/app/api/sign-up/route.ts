@@ -3,7 +3,6 @@ import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
 import bcrypt from "bcryptjs";
 
-import { ApiResponse } from "@/types/ApiResponse";  //cant use because here we need to return NextResponse object, which ApiResponse does know
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {

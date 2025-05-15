@@ -14,7 +14,6 @@ import { ApiResponse } from "@/types/ApiResponse";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,7 +23,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2} from 'lucide-react'
 
-const page = () => {
+const SignUp = () => {
   const [username, setUsername] = useState("");
   const [usernameMessage, setUsernameMessage] = useState("");
   const [isCheckingUsername, setIsCheckingUsername] = useState(false);
@@ -91,7 +90,7 @@ const page = () => {
 
       const axiosError = error as AxiosError<ApiResponse>;
 
-      let errorMessage = axiosError.response?.data.message;
+      const errorMessage = axiosError.response?.data.message;
 
       toast.error("Signup Failed", {
         description: errorMessage,
@@ -181,4 +180,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SignUp;

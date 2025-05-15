@@ -1,7 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
-import { z } from "zod";
 import UserModel from "@/model/User";
-import { usernameValidation } from "@/schemas/signUpSchema";
 import { NextRequest } from "next/server";
 
 //todo verifycode validation using zod

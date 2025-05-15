@@ -9,14 +9,11 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { signInSchema } from '@/schemas/signInSchema'
-import { ApiResponse } from '@/types/ApiResponse'
-import axios, {AxiosError} from 'axios'
 import { useForm } from 'react-hook-form'
-import { PassThrough } from 'stream'
 import { signIn } from 'next-auth/react'
 import { Loader2 } from 'lucide-react'
 
-const page = () => {
+const SignIn = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   
@@ -106,4 +103,4 @@ const page = () => {
   
 }
 
-export default page
+export default SignIn
