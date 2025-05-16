@@ -12,6 +12,7 @@ import { signInSchema } from '@/schemas/signInSchema'
 import { useForm } from 'react-hook-form'
 import { signIn } from 'next-auth/react'
 import { Loader2 } from 'lucide-react'
+import Link from 'next/link'
 
 const SignIn = () => {
 
@@ -96,6 +97,14 @@ const SignIn = () => {
             </Button>
           </form>
         </Form>
+        <div className="text-center mt-4">
+          <p>
+            Not a member yet?{' '}
+            <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
+              Sign up
+            </Link>
+          </p>
+        </div>
         
       </div>
     </div>
