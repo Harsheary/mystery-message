@@ -21,6 +21,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 **Mystery Message** is a full-stack web application built with **Next.js** and **TypeScript**, where users can send and receive anonymous messages—some even generated with the help of AI. It features secure OTP-based authentication, clean UI components, and intelligent message suggestions to keep things fun and engaging.
 
+## Live Demo
+
+[Open Mystery Message](https://mystery-message-jet.vercel.app)
+
 ## 🚀 Tech Stack & Features
 
 - 🔐 **Custom authentication** using **NextAuth** with OTP-based email verification
